@@ -11,9 +11,13 @@
     "url": "https://github.com/karissa/sql-protobuf.git"
   },
   "author": "Karissa McKelvey <karissa@karissamck.com> (http://karissamck.com/)",
-  "license": "ISC",
+  "license": "BSD-2",
   "bugs": {
     "url": "https://github.com/karissa/sql-protobuf/issues"
   },
-  "homepage": "https://github.com/karissa/sql-protobuf"
+  "homepage": "https://github.com/karissa/sql-protobuf",
+  "dependencies": {
+    "protocol-buffers-schema": "^2.0.3",
+    "tape": "^4.2.0"
+  }
 }
