@@ -3,7 +3,7 @@ var mappings = {
   'bigint': 'int64',
   'integer': 'int32',
   'text': 'string',
-  'float': 'float',
+  'real': 'float',
   'date': 'string',
   'boolean': 'bool'
 }
@@ -25,11 +25,9 @@ module.exports = function (data) {
     messages: []
   }
   schemas.forEach(function (schema) {
-    var match = schema.match(/.*CREATE\s+TABLE\s+(IF\s+NOT\s+EXISTS)?\s+(\S+).*/i);
+    var match = schema.match(/.*CREATE\s+TABLE\s+(IF\s+NOT\s+EXISTS)?[\s+]?([\S|\`]+).*/i);
     if (match) {
-      if (schema.match(/.*IF\s+NOT\s+EXISTS.*/i)) var loc = 2
-      else var loc = 1
-      var tableName = normalize(match[loc])
+      var tableName = normalize(match[2])
       var fields = schema.substring(schema.indexOf('(')).trim()
       fields = fields.replace(/^\(/g, '').replace(/\);?$/g, '')
       result.messages.push(Message(tableName, fields))
@@ -45,7 +43,8 @@ function Message (name, fields) {
     messages: [],
     fields: []
   }
-  var lines = fields.split(',');
+
+  var lines = fields.split(/,[$|\"|\`|\'|\s+]/i);
   var tag = 0
   message.fields = lines.map(function (line) {
     tag += 1
@@ -54,20 +53,29 @@ function Message (name, fields) {
   return message
 }
 
-function Field (field, tag) {
-  field = field.trim()
-  var parts = field.split(/\s+/)
-  var type = mappings[parts[1].trim()] || 'string'
-  var required = field.match(/.*NOT\s+NULL.*/)
-  return {
-    name: normalize(parts[0]),
-    type: type,
+function Field (data, tag) {
+  var field = {
+    name: null,
+    type: null,
     tag: tag,
+    options: {},
     repeated: false,
-    required: required && true || false
+    required: false
   }
+
+  var tokens = data.trim().split(/\s+/)
+  field.name = normalize(tokens[0])
+  field.type = mappings[tokens[1].trim()] || 'string'
+  if (data.match(/.*NOT\s+NULL.*/i)) {
+    field.required = true
+  }
+  var default_match = data.match(/.*DEFAULT\s+(\S+).*/i)
+  if (default_match) {
+    field.options.default = default_match[1]
+  }
+  return field
 }
 
 function normalize (string) {
-  return string.replace(/[\'\`\"]/ig, '')
+  return string.replace(/['`"]/ig, '')
 }

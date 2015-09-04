@@ -15,6 +15,9 @@ Yes, this successfully handles:
   * NOT NULL
   * " and ` denotations for variable names
   * bigint
+  * DEFAULT
+  * case inSenSitIvIty
+  * Statement defined in one line
 
 No, this doesn't handle:
   * Anything other than CREATE TABLE statements

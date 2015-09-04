@@ -1,7 +1,7 @@
 syntax = "proto2";
 
 message pluto {
-  optional string boroughtext = 1;
+  optional string boroughtext = 1 [default = 'hello'];
   optional int32 block = 2;
   optional int32 lot = 3;
   optional int32 cd = 4;

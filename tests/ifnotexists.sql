@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS "pluto" (
-  "boroughtext" text,
+  "boroughtext" text default 'hello',
   "block" integer,
   "lot" integer,
   "cd" integer,
