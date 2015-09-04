@@ -1,4 +1,4 @@
-CREATE TABLE "pluto" (
+CREATE TABLE IF NOT EXISTS "pluto" (
   "boroughtext" text,
   "block" integer,
   "lot" integer,
@@ -80,5 +80,5 @@ CREATE TABLE "pluto" (
   "appbbl" bigint,
   "appdate" date,
   "plutomapid" integer,
-  "version" text
+  "version" text  NOT  NULL
 );

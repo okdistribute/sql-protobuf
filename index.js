@@ -56,11 +56,12 @@ function Field (field, tag) {
   field = field.trim()
   var parts = field.split(/\s+/)
   var type = mappings[parts[1].trim()]
+  var required = field.match(/.*NOT\s+NULL.*/)
   return {
-    name: field,
+    name: parts[0].replace(/(\`|\")/g, ''),
     type: type,
     tag: tag,
     repeated: false,
-    required: false
+    required: required && true || false
   }
 }
