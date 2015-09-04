@@ -44,7 +44,7 @@ function Message (name, fields) {
     fields: []
   }
   var lines = fields.split(',');
-  var tag = -1
+  var tag = 0
   message.fields = lines.map(function (line) {
     tag += 1
     return Field(line, tag)
