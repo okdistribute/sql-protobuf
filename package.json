@@ -1,10 +1,13 @@
 {
   "name": "sql-protobuf",
   "version": "1.0.0",
-  "description": "convert sql tables to protobufs",
+  "description": "Convert SQL CREATE TABLE statements to .proto (Proto Buffers)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "sql-protobuf": "cli.js"
   },
   "repository": {
     "type": "git",

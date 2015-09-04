@@ -5,7 +5,7 @@ var mappings = {
   'text': 'string',
   'real': 'float',
   'date': 'string',
-  'boolean': 'boolean'
+  'boolean': 'bool'
 }
 
 // from https://github.com/michalbe/sql-create-table-to-json/blob/master/index.js
@@ -55,7 +55,7 @@ function Message (name, fields) {
 function Field (field, tag) {
   field = field.trim()
   var parts = field.split(/\s+/)
-  var type = mappings[parts[1]]
+  var type = mappings[parts[1].trim()]
   return {
     name: field,
     type: type,
