@@ -16,12 +16,12 @@ Yes, this successfully handles:
   * " and ` denotations for variable names
   * bigint
   * DEFAULT
+  * IF NOT EXISTS
   * case inSenSitIvIty
   * Statement defined in one line
 
 No, this doesn't handle:
   * Anything other than CREATE TABLE statements
-  * IF NOT EXISTS
   * Backwards compatibility
   * Non-basic SQL types
 
