@@ -22,7 +22,7 @@ No, this doesn't handle:
   * Backwards compatibility
   * Probably some SQL types.
 
-If the SQL type isn't found, it'll default to Protocol Buffer's `string` type.
+If the SQL type isn't found, it'll default to Protocol Buffers `string` type.
 
 ### CLI usage
 
