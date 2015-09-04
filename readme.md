@@ -13,14 +13,14 @@ $ npm install -g sql-protobuf
 Yes, this successfully handles:
   * Multiple CREATE TABLE statements in one file
   * NOT NULL
-  * IF NOT EXISTS
   * " and ` denotations for variable names
   * bigint
 
 No, this doesn't handle:
-  * ALTER TABLE statements
+  * Anything other than CREATE TABLE statements
+  * IF NOT EXISTS
   * Backwards compatibility
-  * Probably some SQL types.
+  * Non-basic SQL types
 
 If the SQL type isn't found, it'll default to Protocol Buffers `string` type.
 
