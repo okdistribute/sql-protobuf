@@ -1,6 +1,6 @@
 {
   "name": "sql-protobuf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert SQL CREATE TABLE statements to .proto (Proto Buffers)",
   "main": "index.js",
   "scripts": {
