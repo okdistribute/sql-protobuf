@@ -3,7 +3,7 @@ var mappings = {
   'bigint': 'int64',
   'integer': 'int32',
   'text': 'string',
-  'real': 'float',
+  'float': 'float',
   'date': 'string',
   'boolean': 'bool'
 }
@@ -25,9 +25,11 @@ module.exports = function (data) {
     messages: []
   }
   schemas.forEach(function (schema) {
-    var match = schema.match(/.*CREATE\s+TABLE\s+(\S+).*/);
+    var match = schema.match(/.*CREATE\s+TABLE\s+(IF\s+NOT\s+EXISTS)?\s+(\S+).*/i);
     if (match) {
-      var tableName = match[1].replace(/[\'\`\"]+/ig, '');
+      if (schema.match(/.*IF\s+NOT\s+EXISTS.*/i)) var loc = 2
+      else var loc = 1
+      var tableName = normalize(match[loc])
       var fields = schema.substring(schema.indexOf('(')).trim()
       fields = fields.replace(/^\(/g, '').replace(/\);?$/g, '')
       result.messages.push(Message(tableName, fields))
@@ -58,10 +60,14 @@ function Field (field, tag) {
   var type = mappings[parts[1].trim()] || 'string'
   var required = field.match(/.*NOT\s+NULL.*/)
   return {
-    name: parts[0].replace(/(\`|\")/g, ''),
+    name: normalize(parts[0]),
     type: type,
     tag: tag,
     repeated: false,
     required: required && true || false
   }
+}
+
+function normalize (string) {
+  return string.replace(/[\'\`\"]/ig, '')
 }
