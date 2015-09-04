@@ -55,7 +55,7 @@ function Message (name, fields) {
 function Field (field, tag) {
   field = field.trim()
   var parts = field.split(/\s+/)
-  var type = mappings[parts[1].trim()]
+  var type = mappings[parts[1].trim()] || 'string'
   var required = field.match(/.*NOT\s+NULL.*/)
   return {
     name: parts[0].replace(/(\`|\")/g, ''),
