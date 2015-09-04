@@ -52,10 +52,11 @@ schema.proto
 syntax = "proto2";
 
 message pluto {
-  optional string boroughtext = 0;
-  optional int32 block = 1;
-  optional int64 lot = 2;
-  required string cd = 3;
+  optional string boroughtext = 1;
+  optional int32 block = 2;
+  optional int64 lot = 3;
+  required string cd = 4;
+ }
 ```
 
 ### JS usage
